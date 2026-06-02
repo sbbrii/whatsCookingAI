@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WhatsCooking AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+    <main class="app-shell">
+      <section class="screen pantry-screen visible-screen" id="pantry-screen">
+        <header class="hero-copy">
+          <h1>WhatsCooking <span>AI</span></h1>
+          <p>Your intelligent culinary companion for instant recipe inspiration.</p>
+        </header>
+
+        <section class="pantry-card" aria-labelledby="pantry-title">
+          <div class="pantry-heading">
+            <button
+              class="pantry-icon"
+              id="upload-trigger"
+              type="button"
+              title="Upload recipe PDF"
+              aria-label="Upload recipe PDF"
+            >▣</button>
+            <h2 id="pantry-title">Your Pantry</h2>
+          </div>
+
+          <form id="suggest-form" class="pantry-form">
+            <div class="ingredient-row">
+              <label class="ingredient-input-shell">
+                <span class="search-icon" aria-hidden="true">⌕</span>
+                <input
+                  id="ingredients-input"
+                  type="text"
+                  autocomplete="off"
+                  placeholder="What's in your fridge? (e.g. Avocado, Tomato)"
+                  aria-label="Available ingredient"
+                >
+              </label>
+              <button class="add-button" id="add-ingredient" type="button">Add</button>
+            </div>
+
+            <div class="ingredient-chips" id="ingredient-chips" aria-live="polite"></div>
+
+            <button class="find-button" id="suggest-button" type="submit">
+              <span>Find Recipes</span>
+              <span aria-hidden="true">✣</span>
+            </button>
+          </form>
+
+          <p class="status-text" id="suggest-status" role="status"></p>
+        </section>
+      </section>
+
+      <section class="screen results-screen" id="results-screen" aria-labelledby="suggestions-title">
+        <div class="results-shell">
+          <button class="back-button" id="back-to-pantry" type="button">← Back to Pantry</button>
+          <h2 id="suggestions-title">AI-Powered Suggestions</h2>
+          <div class="suggestions-grid" id="suggestions-grid" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="screen assistant-screen" id="assistant-screen" aria-labelledby="assistant-title">
+        <div class="assistant-shell">
+          <div class="assistant-heading">
+            <button class="assistant-back" id="back-to-results" type="button" aria-label="Back to results">←</button>
+            <div>
+              <h2 id="assistant-title">Chef AI</h2>
+              <p id="assistant-subtitle">Live Instruction Active</p>
+            </div>
+          </div>
+          <div class="chat-panel">
+            <div class="chat-messages" id="chat-messages"></div>
+            <form id="chat-form" class="chat-form">
+              <input
+                id="chat-input"
+                type="text"
+                placeholder="Ask me anything..."
+                aria-label="Chef AI message"
+              >
+              <button class="send-button" type="submit" aria-label="Send message">Send</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <form class="upload-fab" id="upload-form" aria-label="Upload recipe PDF">
+      <label class="upload-label" id="dropzone">
+        <input id="pdf-input" type="file" accept="application/pdf">
+        <span id="upload-file-name">Upload PDF</span>
+      </label>
+      <button id="upload-button" type="submit">Index</button>
+      <span class="upload-status" id="upload-status" role="status"></span>
+    </form>
+
+    <dialog class="recipe-modal" id="recipe-modal">
+      <div class="modal-header">
+        <div>
+          <p>Recipe</p>
+          <h2 id="modal-title">Recipe Details</h2>
+        </div>
+        <button class="close-button" id="modal-close" type="button" aria-label="Close recipe">
+          Close
+        </button>
+      </div>
+      <div class="modal-body">
+        <section>
+          <h3>Ingredients</h3>
+          <ul id="modal-ingredients"></ul>
+        </section>
+        <section>
+          <h3>Instructions</h3>
+          <pre id="modal-instructions"></pre>
+        </section>
+      </div>
+    </dialog>
+
+    <script src="script.js"></script>
+  </body>
+</html>
